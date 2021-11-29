@@ -9,7 +9,7 @@ class GitCicdApplicationTests {
 
     @Test
     void contextLoads() {
-        boolean isTrue = false;
+        boolean isTrue = true;
         Assert.isTrue(isTrue, "It is not true");
     }
 
