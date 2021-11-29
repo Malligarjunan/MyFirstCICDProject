@@ -13,6 +13,7 @@ public class GitCicdApplication {
     public String helloWorld() {
         return "My First Hello World Spring Boot CI CD Project";
     }
+
     public static void main(String[] args) {
         SpringApplication.run(GitCicdApplication.class, args);
     }
