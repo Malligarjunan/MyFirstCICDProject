@@ -11,7 +11,7 @@ public class GitCicdApplication {
 
     @GetMapping("/helloWorld")
     public String helloWorld() {
-        return "My First Hello World Spring Boot CI CD Project";
+        return "My First Hello World Spring Boot CI CD Project Test";
     }
 
     public static void main(String[] args) {
