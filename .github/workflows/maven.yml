@@ -34,3 +34,11 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Dependabot
+        uses: docker://dependabot/dependabot-script:latest
+        with:
+          command: "script/list-outdated-jars"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPENDABOT_LIST_OUTDATED_JARS_AGE: "365"    
