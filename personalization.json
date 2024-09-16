@@ -1,0 +1,3918 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/attributes": {
+      "post": {
+        "operationId": "AttributeController_create",
+        "summary": "Create an Attribute",
+        "description": "The Create an Attribute request lets you create a new attribute in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Attribute",
+                "$ref": "#/components/schemas/Attribute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The attribute was created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "Age",
+                  "key": "age",
+                  "description": "Age of the visitor",
+                  "project": "64c7787b333555469a861224",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-13T15:39:51.645Z",
+                  "uid": "6xxxxxxxxxx2",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe",
+                  "__type": "CUSTOM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "key": [
+                      {
+                        "code": "personalization.ATTRIBUTES.DUPLICATE_KEY"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attributes"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "AttributeController_find",
+        "summary": "Get all Attributes",
+        "description": "The Get all Attributes request fetches the list of all the attributes in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attributes were returned successfully",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "name": "Age",
+                    "key": "age",
+                    "description": "Age of the visitor",
+                    "project": "64c7787b333555469a861224",
+                    "createdBy": "bxxxxxxxxxxxx3",
+                    "updatedBy": "bxxxxxxxxxxxx6",
+                    "createdAt": "2024-03-13T15:39:51.645Z",
+                    "updatedAt": "2024-03-13T15:39:51.645Z",
+                    "uid": "6xxxxxxxxxx2",
+                    "createdByUserName": "Jane Doe",
+                    "updatedByUserName": "Jane Doe",
+                    "__type": "CUSTOM"
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attributes"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/attributes/{uid}": {
+      "put": {
+        "operationId": "AttributeController_update",
+        "summary": "Update an Attribute",
+        "description": "The Update an Attribute request lets you update an existing attribute in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Attribute UID to be updated.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Attribute"
+              },
+              "examples": {
+                "Update Attribute": {
+                  "value": {
+                    "name": "Visitor Age",
+                    "key": "age",
+                    "description": "Age of the visitor from profile"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The attribute was updated successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "Visitor Age",
+                  "key": "age",
+                  "description": "Age of the visitor from profile",
+                  "project": "64c7787b333555469a861224",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-13T15:40:00.000Z",
+                  "uid": "6xxxxxxxxxx2",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe",
+                  "__type": "CUSTOM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                  "error": "Bad Request",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Attribute not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.ATTRIBUTES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attributes"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "AttributeController_deleteAttribute",
+        "summary": "Delete an Attribute",
+        "description": "The Delete an Attribute request lets you delete an existing attribute in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Attribute UID to be deleted.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The attributes were deleted successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                  "error": "Bad Request",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Attribute not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.ATTRIBUTES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attributes"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/audiences": {
+      "post": {
+        "operationId": "AudienceController_create",
+        "summary": "Create an Audience",
+        "description": "The `Create an Audience` request lets you create a new audience in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.\n\nThe examples below provide a detailed explanation on creating audiences with various parameters.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Audience",
+                "$ref": "#/components/schemas/Audience"
+              },
+              "examples": {
+                "presetAttributes": {
+                  "summary": "Create audience with Preset Attributes",
+                  "description": "In this example, we create an audience with a Geolocation Preset Attribute. The `definition` of an audience consists of a list of rules. Each rule has a reference to an attribute, an `attributeMatchCondition` and `attributeMatchOptions`.",
+                  "value": {
+                    "name": "US Visitors",
+                    "description": "Website visitors from the US",
+                    "definition": {
+                      "__type": "RuleCombination",
+                      "combinationType": "AND",
+                      "rules": [
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "COUNTRY"
+                          },
+                          "attributeMatchCondition": "STRING_EQUALS",
+                          "attributeMatchOptions": {
+                            "__type": "StringMatchOptions",
+                            "value": "US"
+                          },
+                          "invertCondition": false
+                        }
+                      ]
+                    }
+                  }
+                },
+                "customAttributes": {
+                  "summary": "Create audience with Custom Attributes",
+                  "description": "This example creates an audience with Custom Attributes. We have two rules being matched here, the second one matching a custom attribute. The `__type` on the `attribute` allows you to specify whether the attribute is Custom or Preset.",
+                  "value": {
+                    "name": "Valuable US Visitors",
+                    "description": "US Visitors with an average order value greater than $1000",
+                    "definition": {
+                      "__type": "RuleCombination",
+                      "combinationType": "AND",
+                      "rules": [
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "COUNTRY"
+                          },
+                          "attributeMatchCondition": "STRING_EQUALS",
+                          "attributeMatchOptions": {
+                            "__type": "StringMatchOptions",
+                            "value": "US"
+                          },
+                          "invertCondition": false
+                        },
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "CustomAttributeReference",
+                            "ref": "66702e03d84509d0106bec05"
+                          },
+                          "attributeMatchOptions": {
+                            "__type": "NumberMatchOptions",
+                            "value": 1000
+                          },
+                          "attributeMatchCondition": "NUMBER_GREATER_THAN",
+                          "invertCondition": false
+                        }
+                      ]
+                    }
+                  }
+                },
+                "queryParameterAttribute": {
+                  "summary": "Match Query Parameters",
+                  "description": "Query Parameters are a Preset Attribute. In this example, the query parameter `utm_campaign` is matched for a `BLACK_FRIDAY` value. The `JSONMatchOptions` type allow you to nest a `matchOptions` so that you can match specific values for the parameter.",
+                  "value": {
+                    "name": "Black Friday Campaign",
+                    "description": "Visitors targeted with the Black Friday Campaign",
+                    "definition": {
+                      "__type": "RuleCombination",
+                      "combinationType": "AND",
+                      "rules": [
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "QUERY_PARAMETERS"
+                          },
+                          "attributeMatchCondition": "JSON_MATCH",
+                          "attributeMatchOptions": {
+                            "__type": "JSONMatchOptions",
+                            "pointer": "/utm_campaign",
+                            "matchCondition": "STRING_EQUALS",
+                            "matchOptions": {
+                              "__type": "StringMatchOptions",
+                              "value": "BLACK_FRIDAY"
+                            },
+                            "invertCondition": false
+                          },
+                          "invertCondition": false
+                        }
+                      ]
+                    }
+                  }
+                },
+                "dateTimeAttribute": {
+                  "summary": "Match Date and Time",
+                  "description": "Date and Time is a Preset Attribute. In this example, we extend the Black Friday Campaign audience to also match only on the day of Black Friday. `useVisitorTimezone` allows us to evaluate the conditions in the visitors timezone.",
+                  "value": {
+                    "name": "Black Friday Campaign",
+                    "description": "Visitors targeted with the Black Friday Campaign",
+                    "definition": {
+                      "__type": "RuleCombination",
+                      "combinationType": "AND",
+                      "rules": [
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "QUERY_PARAMETERS"
+                          },
+                          "attributeMatchOptions": {
+                            "__type": "JSONMatchOptions",
+                            "pointer": "/utm_campaign",
+                            "matchCondition": "STRING_EQUALS",
+                            "matchOptions": {
+                              "__type": "StringMatchOptions",
+                              "value": "BLACK_FRIDAY"
+                            },
+                            "invertCondition": false
+                          },
+                          "attributeMatchCondition": "JSON_MATCH",
+                          "invertCondition": false
+                        },
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "DATE_AND_TIME"
+                          },
+                          "attributeMatchCondition": "BETWEEN_TIME",
+                          "attributeMatchOptions": {
+                            "__type": "DateTimeMatchOptions",
+                            "startTime": "2024-11-29T00:00:00",
+                            "endTime": "2024-11-29T23:59:59",
+                            "useVisitorTimezone": true
+                          },
+                          "invertCondition": false
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The audience was created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "US Visitors",
+                  "description": "Website visitors from the US",
+                  "definition": {
+                    "__type": "RuleCombination",
+                    "combinationType": "AND",
+                    "rules": [
+                      {
+                        "__type": "Rule",
+                        "attribute": {
+                          "__type": "PresetAttributeReference",
+                          "ref": "COUNTRY"
+                        },
+                        "attributeMatchOptions": {
+                          "__type": "StringMatchOptions",
+                          "value": "US"
+                        },
+                        "attributeMatchCondition": "STRING_EQUALS",
+                        "invertCondition": false
+                      }
+                    ]
+                  },
+                  "project": "6c7787b333555469a8612227",
+                  "referredAttributes": [],
+                  "createdBy": "bxxxxxxxxxxxxxxxxx7",
+                  "updatedBy": "bxxxxxxxxxxxxxxxxx7",
+                  "createdAt": "2024-08-22T09:46:11.680Z",
+                  "updatedAt": "2024-08-22T09:46:11.680Z",
+                  "uid": "66c708e3fe314f5067826852",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "name": [
+                      {
+                        "code": "personalization.AUDIENCES.DUPLICATE_NAME"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "AudienceController_get",
+        "summary": "Get all Audiences",
+        "description": "The Get all Audiences request fetches the list of all the audiences in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "referredAttributes[]",
+            "required": false,
+            "in": "query",
+            "description": "Filter audiences by passing a list of attribute UIDs. The audiences referring to the given attributes will be returned.",
+            "example": "GET /audiences?referredAttributes[]=6xxxxxxxxxx2&referredAttributes[]=4xxxxxxxxxx3",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The audiences were returned successfully",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "name": "Indian",
+                    "description": "",
+                    "definition": {
+                      "__type": "RuleCombination",
+                      "combinationType": "AND",
+                      "rules": [
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "COUNTRY"
+                          },
+                          "attributeMatchOptions": {
+                            "__type": "StringMatchOptions",
+                            "value": "IN"
+                          },
+                          "attributeMatchCondition": "STRING_EQUALS",
+                          "invertCondition": false
+                        },
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "DATE_AND_TIME"
+                          },
+                          "attributeMatchOptions": {
+                            "__type": "DateTimeMatchOptions",
+                            "value": "2023-09-28T18:40:10+00:00",
+                            "useVisitorTimezone": false
+                          },
+                          "attributeMatchCondition": "BEFORE_TIME",
+                          "invertCondition": false
+                        },
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "CustomAttributeReference",
+                            "ref": "6c7787b333555469a861222e"
+                          },
+                          "attributeMatchOptions": {
+                            "__type": "NumberMatchOptions",
+                            "value": 25
+                          },
+                          "attributeMatchCondition": "NUMBER_EQUAL_TO",
+                          "invertCondition": false
+                        },
+                        {
+                          "__type": "Rule",
+                          "attribute": {
+                            "__type": "PresetAttributeReference",
+                            "ref": "DEVICE_TYPE"
+                          },
+                          "attributeMatchOptions": {
+                            "__type": "StringMatchOptions",
+                            "value": "MOBILE"
+                          },
+                          "attributeMatchCondition": "STRING_EQUALS",
+                          "invertCondition": false
+                        },
+                        {
+                          "__type": "RuleCombination",
+                          "combinationType": "AND",
+                          "rules": [
+                            {
+                              "__type": "Rule",
+                              "attribute": {
+                                "__type": "PresetAttributeReference",
+                                "ref": "DEVICE_TYPE"
+                              },
+                              "attributeMatchOptions": {
+                                "__type": "StringMatchOptions",
+                                "value": "MOBILE"
+                              },
+                              "attributeMatchCondition": "STRING_EQUALS",
+                              "invertCondition": false
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "project": "6c7787b333555469a8612227",
+                    "referredAttributes": [
+                      "6c7787b333555469a861222e"
+                    ],
+                    "createdBy": "bxxxxxxxxxxxx3",
+                    "updatedBy": "bxxxxxxxxxxxx6",
+                    "createdAt": "2024-03-13T15:39:51.645Z",
+                    "updatedAt": "2024-03-13T15:39:51.645Z",
+                    "uid": "6c7787b333555469a8612229",
+                    "createdByUserName": "Jane Doe",
+                    "updatedByUserName": "Jane Doe"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                  "error": "Bad Request",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/audiences/{uid}": {
+      "put": {
+        "operationId": "AudienceController_update",
+        "summary": "Update an audience",
+        "description": "The `Update an Audience` request lets you update an existing audience in a project.\n\nTo configure the permissions for your application via OAuth, include the personalize:manage scope.\n\nFor more detailed request body documentation, please refer to the `Create an Audience` request.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Audience UID to be updated.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Audience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The audience was updated successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "US Visitors",
+                  "description": "Visitors from the US",
+                  "definition": {
+                    "__type": "RuleCombination",
+                    "combinationType": "AND",
+                    "rules": [
+                      {
+                        "__type": "Rule",
+                        "attribute": {
+                          "__type": "PresetAttributeReference",
+                          "ref": "COUNTRY"
+                        },
+                        "attributeMatchOptions": {
+                          "__type": "StringMatchOptions",
+                          "value": "US"
+                        },
+                        "attributeMatchCondition": "STRING_EQUALS",
+                        "invertCondition": false
+                      }
+                    ]
+                  },
+                  "project": "6c7787b333555469a8612227",
+                  "referredAttributes": [],
+                  "createdBy": "bxxxxxxxxxxxxxxxxx7",
+                  "updatedBy": "bxxxxxxxxxxxxxxxxx7",
+                  "createdAt": "2024-08-22T09:46:11.680Z",
+                  "updatedAt": "2024-08-22T11:43:35.232Z",
+                  "uid": "66c708e3fe314f5067826852",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "name": [
+                      {
+                        "code": "personalization.AUDIENCES.DUPLICATE_NAME"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.AUDIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "AudienceController_deleteAudience",
+        "summary": "Delete an audience",
+        "description": "The `Delete an Audience` request lets you delete an existing audience in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Audience UID to be deleted.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The audience was deleted successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                  "error": "Bad Request",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.AUDIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Audiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences": {
+      "post": {
+        "operationId": "ExperienceController_create",
+        "summary": "Create an Experience",
+        "description": "The Create an Experience request lets you create a new experience in a project. An experience can be either of `AUDIENCE` or `AB_TESTING` type. Creating an experience also creates an empty draft version for the configuration.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Experience",
+                "$ref": "#/components/schemas/CreateExperienceDto"
+              },
+              "examples": {
+                "abTesting": {
+                  "summary": "Create an A/B Test",
+                  "description": "In this example, we create an A/B Test experience. The `__type` field is used to set the type of the experience. Note that the experience in the response has a `latestVersion` field pointing to the draft version created along with the experience.",
+                  "value": {
+                    "name": "CTA color test",
+                    "description": "Test if using a warmer color on the CTA improves conversions",
+                    "__type": "AB_TESTING",
+                    "_isVersioned": true
+                  }
+                },
+                "segmented": {
+                  "summary": "Create a Segmented Experience",
+                  "description": "In this example, we create a Segmented Experience. The `__type` field is used to set the type of the experience. Note that the experience in the response has a `latestVersion` field pointing to the draft version configuration created along with the experience.",
+                  "value": {
+                    "name": "Australian Users Experience",
+                    "description": "This is the experience for Australian users.",
+                    "__type": "AUDIENCE",
+                    "_isVersioned": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The experience was created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "shortUid": "1",
+                  "name": "CTA color test",
+                  "description": "Test if using a warmer color on the CTA improves conversions",
+                  "__type": "AB_TESTING",
+                  "project": "6887777b3335554698867847",
+                  "status": "DRAFT",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "referredAudiences": [],
+                  "referredEvents": [],
+                  "_isVersioned": true,
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-13T15:39:51.645Z",
+                  "uid": "6887777xxxxxxxxx98867841",
+                  "hasDraft": true,
+                  "latestVersion": "66d5ad0000000001412ae841",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "__type": [
+                      {
+                        "code": "personalization.EXPERIENCES.INVALID_EXPERIENCE_TYPE"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ExperienceController_find",
+        "summary": "Get all Experiences",
+        "description": "The Get all Experiences request fetches the list of all the experiences in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "referredEvents[]",
+            "required": false,
+            "in": "query",
+            "description": "Filter experiences by passing a list of event UIDs. The experiences referring to the given events as metrics will be returned.",
+            "example": "GET /experiences?referredEvents[]=6xxxxxxxxxx2&referredEvents[]=4xxxxxxxxxx3",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "referredAudiences[]",
+            "required": false,
+            "in": "query",
+            "description": "Filter experiences by passing a list of audience UIDs. The experiences referring to the given audiences in its variants (for segmented experiences) or targeting criteria (for A/B test experiences) will be returned.",
+            "example": "GET /experiences?referredAudiences[]=6xxxxxxxxxx2&referredAudiences[]=4xxxxxxxxxx3",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experiences were returned successfully",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "shortUid": "1",
+                    "name": "CTA color",
+                    "description": "Use a warmer color on the CTA to improve conversion",
+                    "__type": "AB_TESTING",
+                    "project": "6887777b3335554698867847",
+                    "status": "DRAFT",
+                    "createdBy": "bxxxxxxxxxxxx3",
+                    "updatedBy": "bxxxxxxxxxxxx6",
+                    "referredAudiences": [],
+                    "referredEvents": [],
+                    "_isVersioned": true,
+                    "createdAt": "2024-03-13T15:39:51.645Z",
+                    "updatedAt": "2024-03-14T17:00:00.000Z",
+                    "uid": "6887777xxxxxxxxx98867841",
+                    "hasDraft": true,
+                    "latestVersion": "66d5ad0000000001412ae841",
+                    "createdByUserName": "Jane Doe",
+                    "updatedByUserName": "Jane Doe"
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences/{uid}": {
+      "put": {
+        "operationId": "ExperienceController_update",
+        "summary": "Update an Experience",
+        "description": "The Update an Experience request lets you update an existing experience in a project. Note that once an experience of a particular type has been created, the type cannot be changed with this request.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to be updated.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-versioned-experience",
+            "in": "header",
+            "description": "Fill in `true` as the value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Experience",
+                "$ref": "#/components/schemas/Experience"
+              },
+              "examples": {
+                "abTesting": {
+                  "value": {
+                    "name": "CTA color",
+                    "description": "Use a warmer color on the CTA to improve conversion",
+                    "__type": "AB_TESTING",
+                    "_isVersioned": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The experience was updated successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "shortUid": "1",
+                  "name": "CTA color",
+                  "description": "Use a warmer color on the CTA to improve conversion",
+                  "__type": "AB_TESTING",
+                  "project": "6887777b3335554698867847",
+                  "status": "DRAFT",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "referredAudiences": [],
+                  "referredEvents": [],
+                  "_isVersioned": true,
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-14T17:00:00.000Z",
+                  "uid": "6887777xxxxxxxxx98867841",
+                  "hasDraft": true,
+                  "latestVersion": "66d5ad0000000001412ae841",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "__type": [
+                      {
+                        "code": "personalization.EXPERIENCES.INVALID_EXPERIENCE_TYPE"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ExperienceController_findOne",
+        "summary": "Get a Single Experience",
+        "description": "The Get a Single Experience request fetches a specific experience created in your project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to be retrieved",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experience was returned successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "shortUid": "1",
+                  "name": "CTA color",
+                  "description": "Use a warmer color on the CTA to improve conversion",
+                  "__type": "AB_TESTING",
+                  "project": "6887777b3335554698867847",
+                  "status": "DRAFT",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "referredAudiences": [],
+                  "referredEvents": [],
+                  "_isVersioned": true,
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-14T17:00:00.000Z",
+                  "uid": "6887777xxxxxxxxx98867841",
+                  "hasDraft": true,
+                  "latestVersion": "66d5ad0000000001412ae841",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                  "error": "Bad Request",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "ExperienceController_delete",
+        "summary": "Delete an Experience",
+        "description": "The Delete an Experience request lets you delete an existing experience in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to be deleted",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-versioned-experience",
+            "in": "header",
+            "description": "Fill in `true` as the value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The experience was deleted successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                  "error": "Bad Request",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/events": {
+      "post": {
+        "operationId": "EventController_create",
+        "summary": "Create an Event",
+        "description": "The Create an Event request lets you create a new event in a project.\n\nThe `key` field is used to uniquely identify the event. You'll use it when triggering an event from the API or SDK.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The event was created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "key": "ctaClick",
+                  "description": "Click on the website CTA",
+                  "project": "64c7787b333555469a861223",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-13T15:39:51.645Z",
+                  "uid": "65f7caf2602dc4333ec201be",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "key": [
+                      {
+                        "code": "personalization.EVENTS.DUPLICATE_KEY"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "EventController_find",
+        "summary": "Get all Events",
+        "description": "The Get all Events request fetches the list of all the events in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The events were returned successfully",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "key": "ctaClick",
+                    "description": "Click on the website CTA",
+                    "project": "64c7787b333555469a861227",
+                    "createdBy": "bxxxxxxxxxxxx3",
+                    "updatedBy": "bxxxxxxxxxxxx6",
+                    "createdAt": "2024-03-13T15:39:51.645Z",
+                    "updatedAt": "2024-03-13T15:39:51.645Z",
+                    "uid": "64c78966ca0d5bf5f7bcc5f5",
+                    "createdByUserName": "Jane Doe",
+                    "updatedByUserName": "Jane Doe"
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/events/{uid}": {
+      "put": {
+        "operationId": "EventController_update",
+        "summary": "Update an Event",
+        "description": "The Update an Event request lets you update an existing event in a project.\n\nThe `key` field is used to uniquely identify the event. You'll use it when triggering an event from the API or SDK.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Event UID to be updated.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The event was updated successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "key": "click",
+                  "description": "Event description",
+                  "project": "64c7787b333555469a861223",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx6",
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-13T15:39:51.645Z",
+                  "uid": "65f7caf2602dc4333ec201be",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "key": [
+                      {
+                        "code": "personalization.EVENTS.DUPLICATE_KEY"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EVENTS.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "EventController_deleteEvent",
+        "summary": "Delete an Event",
+        "description": "The Delete an Event request lets you delete an existing event in a project.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Event UID to be deleted.",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The event was deleted successfully"
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EVENTS.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences/{uid}/versions": {
+      "post": {
+        "operationId": "ExperienceVersionController_createVersion",
+        "summary": "Create an Experience Version",
+        "description": "The Create an Experience Version request lets you create a new version of an experience in a project.\n\nCreating a new version allows you to modify the configuration of an existing active version. A version can be created with a `DRAFT` or `ACTIVE` status. A new version cannot be created if a `DRAFT` version already exists, in which case you can only modify the existing `DRAFT` version.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to version",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Experience Version",
+                "$ref": "#/components/schemas/Experience Version"
+              },
+              "examples": {
+                "abTest": {
+                  "summary": "Create an A/B test version",
+                  "description": "Here, we create a `DRAFT` version of an existing active experience. In the draft, we add a new variant `Red` and also update where the A/B test is being targeted. Notice how we use the same short UIDs from the existing version while leaving out the short UID field for the new variant, which allows the server to create and assign a new short UID for the variant.",
+                  "value": {
+                    "status": "DRAFT",
+                    "variants": [
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Control",
+                        "shortUid": "0",
+                        "trafficDistribution": 33.33
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Purple",
+                        "shortUid": "1",
+                        "trafficDistribution": 33.33
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Red",
+                        "trafficDistribution": 33.33
+                      }
+                    ],
+                    "variantSplit": "EQUALLY_SPLIT",
+                    "metrics": [
+                      {
+                        "__type": "Primary",
+                        "event": "244444400000000087654321",
+                        "name": "Click on CTA"
+                      }
+                    ],
+                    "targeting": {
+                      "audience": {
+                        "audiences": [
+                          "155555500000000012345678"
+                        ],
+                        "audienceCombinationType": "AND"
+                      }
+                    }
+                  }
+                },
+                "segmented": {
+                  "summary": "Create a Segmented Experience version",
+                  "description": "In this example, we create a new `DRAFT` version of our segmented experience. We want to target the entire Australian continent instead of just the country, and accordingly, we also target one more audience in the variant and change the `audienceCombinationType`. The short UID refers to the existing variant's short UID so that we can update it.",
+                  "value": {
+                    "status": "DRAFT",
+                    "variants": [
+                      {
+                        "__type": "AudienceBasedVariation",
+                        "name": "Australian Continent Visitors",
+                        "shortUid": "0",
+                        "audiences": [
+                          "388888800000000087654321",
+                          "399999900000000044444444"
+                        ],
+                        "audienceCombinationType": "OR"
+                      }
+                    ]
+                  }
+                },
+                "active": {
+                  "summary": "Create an active version",
+                  "description": "The example here is the same A/B test, however, instead of creating a `DRAFT` version, we're activating the version instantly. The changes in the version are instantly reflected and the existing version is `ARCHIVED`.",
+                  "value": {
+                    "status": "ACTIVE",
+                    "variants": [
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Control",
+                        "shortUid": "0",
+                        "trafficDistribution": 33.33
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Purple",
+                        "shortUid": "1",
+                        "trafficDistribution": 33.33
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Red",
+                        "trafficDistribution": 33.33
+                      }
+                    ],
+                    "variantSplit": "EQUALLY_SPLIT",
+                    "metrics": [
+                      {
+                        "__type": "Primary",
+                        "event": "244444400000000087654321",
+                        "name": "Click on CTA"
+                      }
+                    ],
+                    "targeting": {
+                      "audience": {
+                        "audiences": [
+                          "155555500000000012345678"
+                        ],
+                        "audienceCombinationType": "AND"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The version was created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "uid": "9888888xxxxxxxxx89102123",
+                  "experienceUid": "688777700000000098867841",
+                  "__type": "AB_TEST",
+                  "variants": [
+                    {
+                      "__type": "ABTestingBasedVariation",
+                      "name": "Control",
+                      "shortUid": "0",
+                      "trafficDistribution": 33.33
+                    },
+                    {
+                      "__type": "ABTestingBasedVariation",
+                      "name": "Purple",
+                      "shortUid": "1",
+                      "trafficDistribution": 33.33
+                    },
+                    {
+                      "__type": "ABTestingBasedVariation",
+                      "name": "Red",
+                      "trafficDistribution": 33.33,
+                      "shortUid": "2"
+                    }
+                  ],
+                  "variantSplit": "EQUALLY_SPLIT",
+                  "metrics": [
+                    {
+                      "__type": "Primary",
+                      "event": "244444400000000087654321",
+                      "name": "Click on CTA"
+                    }
+                  ],
+                  "targeting": {
+                    "audience": {
+                      "audiences": [
+                        "155555500000000012345678"
+                      ],
+                      "audienceCombinationType": "AND"
+                    }
+                  },
+                  "status": "DRAFT",
+                  "createdAt": "2024-03-15T15:39:51.645Z",
+                  "updatedAt": "2024-03-15T15:39:51.645Z",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx3",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "__type": [
+                      {
+                        "variants": "personalization.VARIATION.INVALID_PERCENTAGE_SUM"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ExperienceVersionController_get",
+        "summary": "Get all Experience Versions",
+        "description": "The Get all Experience Versions request fetches the list of all the versions for a given Experience.\n\nThe list of versions is sorted by the `createdAt` date.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to version",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The versions were returned successfully",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "uid": "9888888xxxxxxxxx89102123",
+                    "experienceUid": "688777700000000098867841",
+                    "__type": "AB_TEST",
+                    "variants": [
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Control",
+                        "shortUid": "0",
+                        "trafficDistribution": 33.33
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Purple",
+                        "shortUid": "1",
+                        "trafficDistribution": 33.33
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Red",
+                        "trafficDistribution": 33.33,
+                        "shortUid": "2"
+                      }
+                    ],
+                    "variantSplit": "EQUALLY_SPLIT",
+                    "metrics": [
+                      {
+                        "__type": "Primary",
+                        "event": "244444400000000087654321",
+                        "name": "Click on CTA"
+                      }
+                    ],
+                    "targeting": {
+                      "audience": {
+                        "audiences": [
+                          "155555500000000012345678"
+                        ],
+                        "audienceCombinationType": "AND"
+                      }
+                    },
+                    "status": "DRAFT",
+                    "createdAt": "2024-03-15T15:39:51.645Z",
+                    "updatedAt": "2024-03-15T15:39:51.645Z",
+                    "createdBy": "bxxxxxxxxxxxx3",
+                    "updatedBy": "bxxxxxxxxxxxx3",
+                    "createdByUserName": "Jane Doe",
+                    "updatedByUserName": "Jane Doe"
+                  }
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences/{uid}/versions/{versionUid}": {
+      "put": {
+        "operationId": "ExperienceVersionController_update",
+        "summary": "Update an Experience Version",
+        "description": "The Update an Experience Version request lets you update an existing version of an Experience. After creating an Experience initially, an empty draft version is already created, and you can update it to modify the configuration of the Experience. Once the configuration is ready, you can activate the version by updating the status to `ACTIVE`. Any existing active version's status will change to `ARCHIVED`. You can also `PAUSE` an active version with this request.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "versionUid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience Version UID",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to version",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Experience Version",
+                "$ref": "#/components/schemas/Experience Version"
+              },
+              "examples": {
+                "abTest": {
+                  "summary": "Update an A/B test version",
+                  "description": "Here, we update the configuration for the A/B test created previously. Two variants, `Control` and `Purple` are added with equally split traffic distribution. We also add a primary metric for measuring the performance of these variants. Notice that the `shortUid` is skipped for these new variants as they will be generated on the server side.",
+                  "value": {
+                    "status": "DRAFT",
+                    "variants": [
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Control",
+                        "trafficDistribution": 50
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Purple",
+                        "trafficDistribution": 50
+                      }
+                    ],
+                    "variantSplit": "EQUALLY_SPLIT",
+                    "metrics": [
+                      {
+                        "__type": "Primary",
+                        "event": "244444400000000087654321",
+                        "name": "Click on CTA"
+                      }
+                    ]
+                  }
+                },
+                "segmented": {
+                  "summary": "Update a Segmented Experience version",
+                  "description": "In this example, we update the configuration for the Segmented Experience created previously. We're creating a variant for the visitors from Australia, with the variant targeted to the Australian audience. Notice that the `shortUid` is skipped for the new variant as it will be generated on the server side.",
+                  "value": {
+                    "status": "DRAFT",
+                    "variants": [
+                      {
+                        "__type": "AudienceBasedVariation",
+                        "name": "Australian Visitors",
+                        "audiences": [
+                          "388888800000000087654321"
+                        ],
+                        "audienceCombinationType": "AND"
+                      }
+                    ]
+                  }
+                },
+                "activate": {
+                  "summary": "Activate a version",
+                  "description": "Activating a version is done by updating the status to `ACTIVE`. Any existing active version will be `ARCHIVED` following the activation of a new version.",
+                  "value": {
+                    "status": "ACTIVE",
+                    "variants": [
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Control",
+                        "trafficDistribution": 50
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Purple",
+                        "trafficDistribution": 50
+                      }
+                    ],
+                    "variantSplit": "EQUALLY_SPLIT",
+                    "metrics": [
+                      {
+                        "__type": "Primary",
+                        "event": "244444400000000087654321",
+                        "name": "Click on CTA"
+                      }
+                    ]
+                  }
+                },
+                "pause": {
+                  "summary": "Pause a version",
+                  "description": "Pausing a version is achieved by updating the status to `PAUSED`. Once paused, the experience does not match any variants and will return `null` in the Manifest API. You can also re-activate the version again by updating it with the `ACTIVE` status.",
+                  "value": {
+                    "status": "PAUSED",
+                    "variants": [
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Control",
+                        "trafficDistribution": 50
+                      },
+                      {
+                        "__type": "ABTestingBasedVariation",
+                        "name": "Purple",
+                        "trafficDistribution": 50
+                      }
+                    ],
+                    "variantSplit": "EQUALLY_SPLIT",
+                    "metrics": [
+                      {
+                        "__type": "Primary",
+                        "event": "244444400000000087654321",
+                        "name": "Click on CTA"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The version was updated successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "uid": "9888888xxxxxxxxx89102123",
+                  "experienceUid": "688777700000000098867841",
+                  "__type": "AB_TEST",
+                  "variants": [
+                    {
+                      "__type": "ABTestingBasedVariation",
+                      "name": "Control",
+                      "trafficDistribution": 50,
+                      "shortUid": "0"
+                    },
+                    {
+                      "__type": "ABTestingBasedVariation",
+                      "name": "Purple",
+                      "trafficDistribution": 50,
+                      "shortUid": "1"
+                    }
+                  ],
+                  "variantSplit": "EQUALLY_SPLIT",
+                  "metrics": [
+                    {
+                      "__type": "Primary",
+                      "event": "244444400000000087654321",
+                      "name": "Click on CTA"
+                    }
+                  ],
+                  "status": "DRAFT",
+                  "createdAt": "2024-03-13T15:39:51.645Z",
+                  "updatedAt": "2024-03-14T15:39:51.645Z",
+                  "createdBy": "bxxxxxxxxxxxx3",
+                  "updatedBy": "bxxxxxxxxxxxx3",
+                  "createdByUserName": "Jane Doe",
+                  "updatedByUserName": "Jane Doe"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "__type": [
+                      {
+                        "variants": "personalization.VARIATION.INVALID_PERCENTAGE_SUM"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "ExperienceVersionController_delete",
+        "summary": "Delete an Experience Version",
+        "description": "The Delete an Experience Version request lets you discard the draft version of an Experience. Attempting to delete an `ACTIVE`, `PAUSED` or `ARCHIVED` version will return an error.\n\nTo configure the permissions for your application via OAuth, include the `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "versionUid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience Version UID",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Enter the Experience UID to version",
+            "example": "6xxxxxxxxxx2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Experience Version was deleted successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "errors": {
+                    "status": [
+                      {
+                        "code": "personalize.EXPERIENCES.VERSIONS.CANNOT_DELETE_LOCKED_VERSION"
+                      }
+                    ]
+                  },
+                  "message": "Bad request"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Forbidden resource",
+                  "error": "Forbidden",
+                  "statusCode": 403
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Experience not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "personalization.EXPERIENCES.NOT_FOUND"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences/{uid}/analytics/summary": {
+      "get": {
+        "operationId": "AnalyticsController_fetchAnalyticsSummary",
+        "summary": "Fetches the analytics summary",
+        "description": "The get analytics summary call fetches the analytics summary for the \n       given experience in your Contentstack Personalize project.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "example": "2024-04-15T05:03:32.112Z",
+            "description": "Fetches analytics till this date",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "example": "2024-04-08T05:03:32.112Z",
+            "description": "Fetches analytics from this date",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeLeadingVariation",
+            "required": false,
+            "in": "query",
+            "description": "Include leading variation for the experience",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Fetch analytics summary for the experience",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The analytics summary was returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "variations": [
+                      {
+                        "name": "Control 1",
+                        "shortUid": "0",
+                        "impressionCount": 1,
+                        "metricConversions": [
+                          {
+                            "metric": "Click",
+                            "count": 0,
+                            "__type": "Primary"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Control 2",
+                        "shortUid": "1",
+                        "impressionCount": 0,
+                        "metricConversions": [
+                          {
+                            "metric": "Click",
+                            "count": 0,
+                            "__type": "Primary"
+                          }
+                        ]
+                      }
+                    ],
+                    "leadingVariation": {
+                      "status": "INSUFFICIENT_DATA"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "experienceNotFound": {
+                    "value": {
+                      "errors": {
+                        "uid": [
+                          {
+                            "code": "personalization.EXPERIENCES.NOT_FOUND"
+                          }
+                        ]
+                      },
+                      "message": "Bad request"
+                    }
+                  },
+                  "invalidObjectId": {
+                    "value": {
+                      "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                      "error": "Bad Request",
+                      "statusCode": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Forbidden resource",
+                    "error": "Forbidden",
+                    "statusCode": 403
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences Analytics"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences/{uid}/analytics/time-series": {
+      "get": {
+        "operationId": "AnalyticsController_fetchTimeSeriesAnalytics",
+        "summary": "Fetches the time-series analytics",
+        "description": "The get time-series analytics call fetches the time-series analytics for \n       the given experience in your Contentstack Personalize project.",
+        "parameters": [
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "required": false,
+            "in": "query",
+            "example": "2024-04-15T05:03:32.112Z",
+            "description": "Fetches analytics till this date",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": false,
+            "in": "query",
+            "example": "2024-04-08T05:03:32.112Z",
+            "description": "Fetches analytics from this date",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "metric",
+            "required": false,
+            "in": "query",
+            "example": "click",
+            "description": "Fetches analytics for specific metric",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Fetch time-series analytics for the experience",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The time-series analytics was returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "timeSeriesImpressions": [
+                      {
+                        "timestamp": "2024-01-03T08:00:00.000Z",
+                        "variantToImpressions": {
+                          "0": 0,
+                          "1": 0
+                        }
+                      },
+                      {
+                        "timestamp": "2024-01-03T09:00:00.000Z",
+                        "variantToImpressions": {
+                          "0": 0,
+                          "1": 0
+                        }
+                      }
+                    ],
+                    "timeSeriesConversions": [
+                      {
+                        "timestamp": "2024-01-03T08:00:00.000Z",
+                        "variantToConversions": {
+                          "0": 0,
+                          "1": 0
+                        }
+                      },
+                      {
+                        "timestamp": "2024-01-03T09:00:00.000Z",
+                        "variantToConversions": {
+                          "0": 0,
+                          "1": 0
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "experienceNotFound": {
+                    "value": {
+                      "errors": {
+                        "uid": [
+                          {
+                            "code": "personalization.EXPERIENCES.NOT_FOUND"
+                          }
+                        ]
+                      },
+                      "message": "Bad request"
+                    }
+                  },
+                  "invalidObjectId": {
+                    "value": {
+                      "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                      "error": "Bad Request",
+                      "statusCode": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Forbidden resource",
+                    "error": "Forbidden",
+                    "statusCode": 403
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences Analytics"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/experiences/{uid}/past-reports": {
+      "get": {
+        "operationId": "PastReportController_fetchPastReports",
+        "summary": "Fetches the past reports",
+        "description": "The get past reports call fetches the past reports for \n       the given experience in your Contentstack Personalize project.",
+        "parameters": [
+          {
+            "name": "uid",
+            "required": true,
+            "in": "path",
+            "description": "Fetch past reports for the experience",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The past reports were returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "_id": "6887777b3335554698867841",
+                      "experienceUid": "6887777b333555469886784c",
+                      "enabledBy": "bxxxxxxxxxxxx3",
+                      "period": {
+                        "start": "2023-07-31T10:16:45.636Z",
+                        "end": "2024-01-03T07:35:14.277Z"
+                      },
+                      "variations": [
+                        {
+                          "shortUid": "2",
+                          "name": "Control 1",
+                          "trafficDistribution": 50
+                        },
+                        {
+                          "shortUid": "1",
+                          "name": "Control 2",
+                          "trafficDistribution": 50
+                        }
+                      ],
+                      "metrics": [
+                        {
+                          "name": "Click",
+                          "__type": "Primary"
+                        }
+                      ],
+                      "targeting": {
+                        "audience": {
+                          "audienceCombinationType": "AND",
+                          "audiences": [
+                            {
+                              "name": "Indian",
+                              "description": ""
+                            }
+                          ]
+                        }
+                      },
+                      "result": {
+                        "leadingVariation": {
+                          "status": "INSUFFICIENT_DATA"
+                        }
+                      },
+                      "analyticsSummary": {
+                        "variations": [
+                          {
+                            "shortUid": "2",
+                            "name": "Control 1",
+                            "impressionCount": 0,
+                            "metricConversions": [
+                              {
+                                "metric": "Click",
+                                "count": 0,
+                                "__type": "Primary"
+                              }
+                            ]
+                          },
+                          {
+                            "shortUid": "0",
+                            "name": "Control 2",
+                            "impressionCount": 0,
+                            "metricConversions": [
+                              {
+                                "metric": "Click",
+                                "count": 0,
+                                "__type": "Primary"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "timeSeriesAnalytics": {
+                        "timeSeriesImpressions": [],
+                        "timeSeriesConversions": []
+                      },
+                      "uid": "6887777b3335554698867841",
+                      "enabledByUserName": "Jane Doe"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "experienceNotFound": {
+                    "value": {
+                      "errors": {
+                        "uid": [
+                          {
+                            "code": "personalization.EXPERIENCES.NOT_FOUND"
+                          }
+                        ]
+                      },
+                      "message": "Bad request"
+                    }
+                  },
+                  "invalidObjectId": {
+                    "value": {
+                      "message": "94344555333555466666bbb700 is not a valid ObjectId",
+                      "error": "Bad Request",
+                      "statusCode": 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unauthorized Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Forbidden resource",
+                    "error": "Forbidden",
+                    "statusCode": 403
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiences Past Reports"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/geolocation/regions": {
+      "get": {
+        "operationId": "RegionController_searchRegions",
+        "summary": "Get all Regions",
+        "description": "The Get all Regions request fetches all the region-based information based on the provided search query. Regions are administrative divisions of a country, such as states or provinces, defined according to ISO 3166-2 (https://en.wikipedia.org/wiki/ISO_3166-2) standard. You can also filter the list by name and region codes.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "example": 10,
+            "description": "The `skip` parameter will allow you to skip the specified number of regions from the response. Along with the `limit` parameter, the `skip` parameter helps you to paginate the response. If there are 1000 regions and you `skip` 900 with a `limit` of 100, the last 100 cities in the list will be returned.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 100,
+            "description": "The `limit` parameter will return a specific number of regions (in between 1-1000) in your response based on the value you provide. If there are 1000 regions and you want to fetch only 100 regions, set the limit as 100. If omited, then only 10 regions are returned by default.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "code[]",
+            "required": false,
+            "in": "query",
+            "example": "US-TX",
+            "description": "The `code[]` parameter will return the regions with the matching code in your response based on the query you provide. This query should be in string format. You can specify multiple codes by repeating the parameter. The region code is case sensitive, and based on the ISO 3166-2 standard.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "example": "Texas",
+            "description": "The `name` parameter will return the regions with the matching name in your response based on the value you provide.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "code": "US-TX",
+                    "name": "Texas",
+                    "parent": "US",
+                    "displayName": "Texas, United States of America"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Geolocation"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/geolocation/countries": {
+      "get": {
+        "operationId": "CountryController_searchRegions",
+        "summary": "Get all Countries",
+        "description": "The Get all Countries request fetches all the country-based information based on the provided search query. The country list is based on the current ISO 3166-1 (https://en.wikipedia.org/wiki/ISO_3166-1) standard.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "example": 10,
+            "description": "The `skip` parameter will allow you to skip the specified number of countries from the response. Along with the `limit` parameter, the `skip` parameter helps you to paginate the response. If there are 200 countries and you `skip` 150 with a `limit` of 50, the last 50 countries in the list will be returned.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 100,
+            "description": "The `limit` parameter will return a specific number of countries (in between 1-1000) in your response based on the value you provide. If there are 200 countries and you want to fetch only 100 countries, set the limit as 100. If omited, then only 10 countries are returned by default.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "code[]",
+            "required": false,
+            "in": "query",
+            "example": "US",
+            "description": "The `code[]` parameter will return the countries with the matching code in your response based on the query you provide. This query should be in string format. You can specify multiple codes by repeating the parameter. The country code is case sensitive, and based on the ISO 3166-1 standard.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "example": "United States",
+            "description": "The `name` parameter will return the countries with the matching name in your response based on the value you provide.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "name": "United States of America",
+                    "code": "US"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Geolocation"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/geolocation/cities": {
+      "get": {
+        "operationId": "CityController_searchCities",
+        "summary": "Get all Cities",
+        "description": "The Get all Cities request fetches all the city-based information based on the provided search query. You can also filter the list by name and city codes.\n\nTo configure the permissions for your application via OAuth, include the `personalize:read` or `personalize:manage` scope.",
+        "parameters": [
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "example": 10,
+            "description": "The `skip` parameter will allow you to skip the specified number of cities from the response. Along with the `limit` parameter, the `skip` parameter helps you to paginate the response. If there are 1000 cities and you `skip` 900 with a `limit` of 100, the last 100 cities in the list will be returned.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "example": 100,
+            "description": "The `limit` parameter will return a specific number of cities (in between 1-1000) in your response based on the value you provide. If there are 1000 cities and you want to fetch only 100 cities, set the limit as 100. If omited, then only 10 cities are returned by default.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "code[]",
+            "required": false,
+            "in": "query",
+            "example": "austin,TX,US",
+            "description": "The `code[]` parameter will return the cities with the matching code in your response based on the query you provide. This query should be in string format. You can specify multiple codes by repeating the parameter. The city code is case sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "required": false,
+            "in": "query",
+            "example": "Austin",
+            "description": "The `name` parameter will return the cities with the matching name in your response based on the value you provide.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "code": "austin,TX,US",
+                    "displayName": "Austin, Texas, United States"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Geolocation"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    },
+    "/manifest": {
+      "get": {
+        "operationId": "ManifestController_find",
+        "summary": "Fetches the manifest",
+        "description": "The get manifest call fetches the manifest i.e the list of active variants for each experience \n    based on the override headers.",
+        "parameters": [
+          {
+            "name": "x-use-draft-experiences",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-use-ab-test-variants",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-use-audiences",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-project-uid",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The manifest was returned successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "activeVariants": {
+                      "0": "0",
+                      "1": "1",
+                      "2": "3",
+                      "4": "b"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Forbidden resource",
+                    "error": "Forbidden",
+                    "statusCode": 403
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Manifest"
+        ],
+        "security": [
+          {
+            "authorization": []
+          },
+          {
+            "authtoken": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Contentstack Personalize Management API",
+    "description": "",
+    "version": "0.1",
+    "contact": {
+
+    }
+  },
+  "tags": [
+    {
+      "name": "Attributes",
+      "description": "Attributes are the individual data points or characteristics about a user that can be used to personalize content, recommendations, and experiences for that user. For example age, location, browsing history, purchases, campaign sources, and so on."
+    },
+    {
+      "name": "Audiences",
+      "description": "Audiences refer to a specific group of people who share certain characteristics, behaviors, or interests. These groups are identified based on various criteria such as demographics (age, gender, location), behavior (buying habits, website visits), interests (hobbies, favorite types of products), and more."
+    },
+    {
+      "name": "Events",
+      "description": "Events refer to specific actions or behaviors that users perform. These actions can then be tracked and analyzed to better understand user's preferences and tailor experiences accordingly. The following Events requests allow you to manage the defined events within a project."
+    },
+    {
+      "name": "Geolocation",
+      "description": "Geolocation, in the context of personalization, is about using a user's geographic location to tailor the experience, making services or content more relevant to their specific physical location. Geolocation APIs in Personalize allow you to access the underlying dataset of Countries, Regions and Cities that you can target.\n\nThis product includes GeoLite2 data created by MaxMind, available from https://www.maxmind.com."
+    },
+    {
+      "name": "Experiences",
+      "description": "Experiences help you create different variations of content pages that cater to different sections of your audience. Experiences are also versioned, so that you can make draft changes on an active version of an experience. The following requests allow you to manage the Segmented and A/B Test Experiences within a project."
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://personalization-api.contentstack.com",
+      "description": "NA"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Enter your OAuth token here. Read more: https://www.contentstack.com/docs/developers/developer-hub/contentstack-oauth",
+        "name": "authorization",
+        "in": "header"
+      },
+      "authtoken": {
+        "type": "apiKey",
+        "name": "authtoken",
+        "in": "header",
+        "description": "Enter your authtoken here. Read more: https://www.contentstack.com/docs/developers/create-tokens/types-of-tokens#authentication-tokens-authtokens"
+      }
+    },
+    "schemas": {
+      "Attribute": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Age",
+            "description": "Name your attribute. The name is unique and have a maximum of 200 characters."
+          },
+          "key": {
+            "type": "string",
+            "example": "age",
+            "description": "The literal key for the attribute. The key is used to access the attribute value from the user profile."
+          },
+          "description": {
+            "type": "string",
+            "example": "Age of the visitor",
+            "description": "Describe your attribute"
+          }
+        },
+        "required": [
+          "name",
+          "key"
+        ]
+      },
+      "CustomAttributeReference": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "example": "6429018375342"
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "PresetAttributeReference": {
+        "type": "object",
+        "properties": {
+          "ref": {
+            "type": "string",
+            "enum": [
+              "DEVICE_TYPE",
+              "OPERATING_SYSTEM",
+              "QUERY_PARAMETERS",
+              "REFERRER",
+              "COUNTRY",
+              "REGION",
+              "CITY",
+              "DATE_AND_TIME"
+            ]
+          }
+        },
+        "required": [
+          "ref"
+        ]
+      },
+      "StringMatchOptions": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "name"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "NumberMatchOptions": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "example": 5
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "JSONMatchOptions": {
+        "type": "object",
+        "properties": {
+          "pointer": {
+            "type": "string",
+            "example": "/pointer"
+          },
+          "matchCondition": {
+            "type": "string",
+            "enum": [
+              "STRING_EQUALS",
+              "HAS_ANY_VALUE",
+              "CONTAINS_SUBSTRING",
+              "IS_FALSE",
+              "IS_TRUE",
+              "NUMBER_LESS_THAN",
+              "NUMBER_GREATER_THAN",
+              "NUMBER_EQUAL_TO"
+            ]
+          },
+          "matchOptions": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StringMatchOptions"
+              },
+              {
+                "$ref": "#/components/schemas/NumberMatchOptions"
+              }
+            ],
+            "example": "name"
+          },
+          "invertCondition": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "pointer",
+          "matchCondition",
+          "matchOptions",
+          "invertCondition"
+        ]
+      },
+      "DateTimeMatchOptions": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "2021-12-21T11:50:44+05:30"
+          },
+          "startTime": {
+            "type": "string",
+            "example": "2021-12-21T11:50:44+05:30"
+          },
+          "endTime": {
+            "type": "string",
+            "example": "2021-12-21T11:50:44+05:30"
+          },
+          "useVisitorTimezone": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Rule": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomAttributeReference"
+              },
+              {
+                "$ref": "#/components/schemas/PresetAttributeReference"
+              }
+            ]
+          },
+          "attributeMatchCondition": {
+            "type": "string",
+            "enum": [
+              "STRING_EQUALS",
+              "HAS_ANY_VALUE",
+              "CONTAINS_SUBSTRING",
+              "IS_FALSE",
+              "IS_TRUE",
+              "NUMBER_LESS_THAN",
+              "NUMBER_GREATER_THAN",
+              "NUMBER_EQUAL_TO",
+              "JSON_MATCH",
+              "BEFORE_TIME",
+              "AFTER_TIME",
+              "BETWEEN_TIME"
+            ]
+          },
+          "attributeMatchOptions": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StringMatchOptions"
+              },
+              {
+                "$ref": "#/components/schemas/NumberMatchOptions"
+              },
+              {
+                "$ref": "#/components/schemas/JSONMatchOptions"
+              },
+              {
+                "$ref": "#/components/schemas/DateTimeMatchOptions"
+              }
+            ]
+          },
+          "invertCondition": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "attribute",
+          "attributeMatchCondition",
+          "attributeMatchOptions",
+          "invertCondition"
+        ]
+      },
+      "RuleCombination": {
+        "type": "object",
+        "properties": {
+          "combinationType": {
+            "type": "string",
+            "enum": [
+              "OR",
+              "AND"
+            ]
+          },
+          "rules": {
+            "example": [
+              {
+                "__type": "Rule",
+                "attribute": {
+                  "__type": "PresetAttributeReference",
+                  "ref": "COUNTRY"
+                },
+                "attributeMatchCondition": "STRING_EQUALS",
+                "attributeMatchOptions": {
+                  "__type": "StringMatchOptions",
+                  "value": "AU"
+                },
+                "invertCondition": false
+              }
+            ],
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Rule"
+                },
+                {
+                  "$ref": "#/components/schemas/RuleCombination",
+                  "title": "RuleCombination"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "combinationType",
+          "rules"
+        ]
+      },
+      "Audience": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Australian"
+          },
+          "description": {
+            "type": "string",
+            "example": "Australian Audience description"
+          },
+          "definition": {
+            "example": {
+              "__type": "RuleCombination",
+              "combinationType": "AND",
+              "rules": [
+                {
+                  "__type": "Rule",
+                  "attribute": {
+                    "__type": "PresetAttributeReference",
+                    "ref": "COUNTRY"
+                  },
+                  "attributeMatchCondition": "STRING_EQUALS",
+                  "attributeMatchOptions": {
+                    "__type": "StringMatchOptions",
+                    "value": "AU"
+                  },
+                  "invertCondition": false
+                }
+              ]
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RuleCombination"
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "definition"
+        ]
+      },
+      "CreateExperienceDto": {
+        "type": "object",
+        "properties": {
+          "__type": {
+            "type": "string",
+            "enum": [
+              "AUDIENCE",
+              "AB_TESTING"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "example": "New Experience"
+          },
+          "description": {
+            "type": "string",
+            "example": "New Experience description"
+          }
+        },
+        "required": [
+          "__type",
+          "name"
+        ]
+      },
+      "DefaultVariation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "New Variant"
+          },
+          "shortUid": {
+            "type": "string",
+            "example": "2"
+          },
+          "trafficDistribution": {
+            "type": "number",
+            "example": 9
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "AudienceBasedVariation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "New Variant"
+          },
+          "shortUid": {
+            "type": "string",
+            "example": "2"
+          },
+          "__type": {
+            "type": "AudienceBasedVariation"
+          },
+          "audiences": {
+            "example": [
+              "2444444xxxxxxxxx87654321",
+              "8749824xxxxxxxxxxx325423"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "audienceCombinationType": {
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "__type",
+          "audiences",
+          "audienceCombinationType"
+        ]
+      },
+      "ABTestingBasedVariation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "New Variant"
+          },
+          "shortUid": {
+            "type": "string",
+            "example": "2"
+          },
+          "__type": {
+            "type": "ABTestingBasedVariation"
+          },
+          "trafficDistribution": {
+            "type": "number",
+            "example": 8
+          }
+        },
+        "required": [
+          "name",
+          "__type"
+        ]
+      },
+      "Metric": {
+        "type": "object",
+        "properties": {
+          "__type": {
+            "type": "string",
+            "enum": [
+              "Primary"
+            ],
+            "example": "Primary"
+          },
+          "event": {
+            "type": "string",
+            "example": "2444444xxxxxxxxx87654321"
+          },
+          "name": {
+            "type": "string",
+            "example": "click"
+          }
+        },
+        "required": [
+          "event",
+          "name"
+        ]
+      },
+      "Experience": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "New Experience"
+          },
+          "description": {
+            "type": "string",
+            "example": "New Experience description"
+          },
+          "__type": {
+            "type": "string",
+            "enum": [
+              "AUDIENCE",
+              "AB_TESTING"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "__type"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "example": "ctaClick"
+          },
+          "description": {
+            "type": "string",
+            "example": "Click on the website CTA"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "TargetAudience": {
+        "type": "object",
+        "properties": {
+          "audiences": {
+            "example": {
+              "audiences": [
+                "64xxxxxxxxxxxxxx2"
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "audienceCombinationType": {
+            "type": "string",
+            "enum": [
+              "AND",
+              "OR"
+            ]
+          }
+        }
+      },
+      "Targeting": {
+        "type": "object",
+        "properties": {
+          "audience": {
+            "example": {
+              "audience": {
+                "audiences": [
+                  "8749824xxxxxxxxxxx325423"
+                ],
+                "audienceCombinationType": "AND"
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TargetAudience"
+              }
+            ]
+          }
+        }
+      },
+      "Experience Version": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "ACTIVE",
+              "PAUSED",
+              "ARCHIVED"
+            ]
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AudienceBasedVariation"
+                },
+                {
+                  "$ref": "#/components/schemas/ABTestingBasedVariation",
+                  "title": "Variant"
+                }
+              ]
+            }
+          },
+          "variantSplit": {
+            "type": "string",
+            "enum": [
+              "EQUALLY_SPLIT",
+              "CUSTOM_PERCENTAGE"
+            ]
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Metric"
+            }
+          },
+          "targeting": {
+            "$ref": "#/components/schemas/Targeting"
+          }
+        },
+        "required": [
+          "status",
+          "variants"
+        ]
+      }
+    }
+  }
+}
